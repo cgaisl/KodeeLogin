@@ -24,11 +24,6 @@ kotlin {
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
             }
         }
-        val commonTest by getting {
-            dependencies {
-                implementation(kotlin("test"))
-            }
-        }
         val jvmMain by getting {
             dependencies {
                 implementation(compose.desktop.common)
