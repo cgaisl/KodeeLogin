@@ -21,6 +21,7 @@ kotlin {
                 @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
                 implementation(compose.components.resources)
 
+                implementation ("org.jetbrains.kotlin:kotlin-stdlib:${extra["kotlin.version"] as String}")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
             }
         }
