@@ -16,7 +16,7 @@ import androidx.compose.ui.zIndex
 import kotlinx.coroutines.delay
 import kotlin.random.Random
 
-sealed class KodeeState(
+data class KodeeTransformation(
     val headRotationX: Float = 0f,
     val headRotationY: Float = 0f,
     val headRotationZ: Float = 0f,
@@ -34,50 +34,13 @@ sealed class KodeeState(
     val armRightTranslationX: Float = 0f,
     val armRightTranslationY: Float = 0f,
     val isBlinking: Boolean = true,
-) {
-    object Idle : KodeeState()
-    object PasswordInputShown : KodeeState(
-        isBlinking = false,
-        armsTranslationX = 00f
-    )
-
-    object PasswordInputHidden : KodeeState(
-        isBlinking = false,
-        armLeftTranslationX = 84f,
-        armLeftRotationZ = 158f,
-        armRightTranslationX = -101f,
-        armRightTranslationY = 15f,
-        armRightRotationZ = -150f,
-    )
-
-    class EmailInput(progress: Float) : KodeeState(
-        headRotationX = -20f,
-        headRotationY = -20f + progress * 40f,
-        headRotationZ = -30f + progress * 60f,
-        faceRotationX = -30f,
-        faceRotationY = -10f + progress * 20f,
-        faceRotationZ = -30f + progress * 60f,
-        faceTranslationY = if (progress <= 0.5f) {
-            10f * (1f - 2f * progress)
-        } else {
-            10f * (2f * progress - 1f)
-        },
-        faceTranslationX = if (progress <= 0.5f) {
-            20f * (1f - 2f * progress)
-        } else {
-            -20f * (2f * progress - 1f)
-        },
-        armsTranslationX = -(-30f + progress * 60f),
-        armsRotationY = -20f + progress * 40f,
-    )
-}
+)
 
 @Composable
 fun Kodee(
-    kodeeState: KodeeState,
-    x: Float = 0f,
-    y: Float = 0f,
-    rot: Float = 0f,
+    transformation: KodeeTransformation,
+    blinks: Boolean = false,
+    armsInFront: Boolean = false,
 ) {
     val conversion = with(LocalDensity.current) {
         1.dp.toPx()
@@ -87,23 +50,23 @@ fun Kodee(
         return (this / conversion).toInt().dp
     }
 
-    var isBlinking by remember { mutableStateOf(false) }
+    var isCurrentlyBlinking by remember { mutableStateOf(false) }
     val eyeRotation by animateFloatAsState(
-        targetValue = if (isBlinking) 90f else 0f,
+        targetValue = if (isCurrentlyBlinking) 90f else 0f,
         animationSpec = tween(
             durationMillis = 200,
             easing = LinearEasing
         ),
         finishedListener = {
-            isBlinking = false
+            isCurrentlyBlinking = false
         }
     )
 
-    LaunchedEffect(kodeeState.isBlinking) {
-        if (!kodeeState.isBlinking) return@LaunchedEffect
+    LaunchedEffect(blinks) {
+        if (!blinks) return@LaunchedEffect
 
         while (true) {
-            isBlinking = true
+            isCurrentlyBlinking = true
             delay((Random.nextInt(1, 10) * 1000L))
         }
     }
@@ -112,15 +75,16 @@ fun Kodee(
         // Arms
         Row(
             modifier = Modifier.zIndex(
-                when (kodeeState) {
-                    KodeeState.PasswordInputHidden, KodeeState.PasswordInputShown -> 1f
-                    is KodeeState.EmailInput, KodeeState.Idle -> 0f
+                if (armsInFront) {
+                    1f
+                } else {
+                    0f
                 }
             )
                 .padding(top = 117.px(), start = 0.px())
                 .graphicsLayer(
-                    translationX = kodeeState.armsTranslationX,
-                    rotationY = kodeeState.armsRotationY,
+                    translationX = transformation.armsTranslationX,
+                    rotationY = transformation.armsRotationY,
                 )
         ) {
             ResourceImage(
@@ -128,9 +92,9 @@ fun Kodee(
                 modifier = Modifier
                     .padding(top = 42.px())
                     .graphicsLayer(
-                        rotationZ = kodeeState.armLeftRotationZ,
-                        translationX = kodeeState.armLeftTranslationX,
-                        translationY = kodeeState.armLeftTranslationY,
+                        rotationZ = transformation.armLeftRotationZ,
+                        translationX = transformation.armLeftTranslationX,
+                        translationY = transformation.armLeftTranslationY,
                     )
             )
 
@@ -139,9 +103,9 @@ fun Kodee(
                 modifier = Modifier
                     .padding(start = 271.px())
                     .graphicsLayer(
-                        rotationZ = kodeeState.armRightRotationZ,
-                        translationX = kodeeState.armRightTranslationX,
-                        translationY = kodeeState.armRightTranslationY,
+                        rotationZ = transformation.armRightRotationZ,
+                        translationX = transformation.armRightTranslationX,
+                        translationY = transformation.armRightTranslationY,
                     )
             )
         }
@@ -160,9 +124,9 @@ fun Kodee(
             modifier = Modifier
                 .padding(top = 0.px(), start = 159.px())
                 .graphicsLayer(
-                    rotationX = kodeeState.headRotationX,
-                    rotationY = kodeeState.headRotationY,
-                    rotationZ = kodeeState.headRotationZ
+                    rotationX = transformation.headRotationX,
+                    rotationY = transformation.headRotationY,
+                    rotationZ = transformation.headRotationZ
                 )
 
         )
@@ -172,11 +136,11 @@ fun Kodee(
             modifier = Modifier
                 .padding(top = 131.px(), start = 223.px())
                 .graphicsLayer(
-                    rotationX = kodeeState.faceRotationX,
-                    rotationY = kodeeState.faceRotationY,
-                    rotationZ = kodeeState.faceRotationZ,
-                    translationY = kodeeState.faceTranslationY,
-                    translationX = kodeeState.faceTranslationX,
+                    rotationX = transformation.faceRotationX,
+                    rotationY = transformation.faceRotationY,
+                    rotationZ = transformation.faceRotationZ,
+                    translationY = transformation.faceTranslationY,
+                    translationX = transformation.faceTranslationX,
                 )
         ) {
             ResourceImage(
