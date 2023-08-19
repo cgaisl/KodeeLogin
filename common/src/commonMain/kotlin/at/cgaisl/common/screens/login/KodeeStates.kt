@@ -9,10 +9,16 @@ sealed class KodeeState(
 ) {
     object Idle : KodeeState()
     object PasswordInputShown : KodeeState(
-        isBlinking = false,
+        isBlinking = true,
         transformation = KodeeTransformation(
-
+            armLeftTranslationX = 84f,
+            armLeftRotationZ = 165f,
+            armLeftTranslationY = 21f,
+            armRightTranslationX = -101f,
+            armRightTranslationY = 15f,
+            armRightRotationZ = -150f,
         ),
+        armsInFront = true
     )
 
     object PasswordInputHidden : KodeeState(

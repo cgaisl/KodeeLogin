@@ -9,7 +9,7 @@ import androidx.compose.runtime.*
 
 @Composable
 internal fun App() {
-    var currentScreen by remember { mutableStateOf(Screens.Showcase) }
+    var currentScreen by remember { mutableStateOf(Screens.Playground) }
 
     Column {
         Row {
@@ -22,7 +22,6 @@ internal fun App() {
 
         when (currentScreen) {
             Screens.Playground -> KodeePlayground()
-            Screens.Showcase -> KodeeShowcase()
             Screens.Login -> TODO()
         }
     }

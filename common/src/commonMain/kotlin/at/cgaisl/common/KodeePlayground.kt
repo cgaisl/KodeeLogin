@@ -20,6 +20,12 @@ fun KodeePlayground() {
     var blinks by remember { mutableStateOf(true) }
     var armsInFront by remember { mutableStateOf(true) }
 
+    fun setToKodeeState(state: KodeeState) {
+        transformation = state.transformation
+        blinks = state.isBlinking
+        armsInFront = state.armsInFront
+    }
+
 
     Row {
         Column {
@@ -44,27 +50,27 @@ fun KodeePlayground() {
             SliderBox {
                 var progress by remember { mutableStateOf(0f) }
 
-                Text("Email-Input", color = Color.White)
+                Text("Email-Input")
 
                 Slider(
                     value = progress,
                     onValueChange = {
                         progress = it
-                        transformation = KodeeState.EmailInput(progress).transformation
+                        setToKodeeState(KodeeState.EmailInput(it))
                     },
                     valueRange = (0f..1f),
                 )
             }
 
-            Button(onClick = { transformation = KodeeState.Idle.transformation }) {
+            Button(onClick = { setToKodeeState(KodeeState.Idle) }) {
                 Text("Idle", color = Color.White)
             }
 
-            Button(onClick = { transformation = KodeeState.PasswordInputHidden.transformation }) {
+            Button(onClick = { setToKodeeState(KodeeState.PasswordInputHidden) }) {
                 Text("Password-Input-Hidden", color = Color.White)
             }
 
-            Button(onClick = { transformation = KodeeState.PasswordInputShown.transformation }) {
+            Button(onClick = { setToKodeeState(KodeeState.PasswordInputShown) }) {
                 Text("Password-Input-Shown", color = Color.White)
             }
         }

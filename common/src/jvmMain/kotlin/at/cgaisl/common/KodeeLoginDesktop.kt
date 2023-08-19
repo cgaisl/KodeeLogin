@@ -11,7 +11,7 @@ fun ApplicationScope.KodeeLoginDesktop() {
     Window(
         onCloseRequest = ::exitApplication,
         title = "Compose for Desktop",
-        state = rememberWindowState(width = 390.dp, height = 844.dp)
+        state = rememberWindowState(width = 1500.dp, height = 1000.dp)
     ) {
         App()
     }
