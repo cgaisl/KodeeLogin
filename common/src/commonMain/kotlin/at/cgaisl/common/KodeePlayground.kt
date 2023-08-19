@@ -12,7 +12,6 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import at.cgaisl.common.screens.login.KodeeState
 
 @Composable
 fun KodeePlayground() {
@@ -20,9 +19,9 @@ fun KodeePlayground() {
     var blinks by remember { mutableStateOf(true) }
     var armsInFront by remember { mutableStateOf(false) }
 
-    fun setToKodeeState(state: KodeeState) {
+    fun setToKodeeState(state: KodeeConfig) {
         transformation = state.transformation
-        blinks = state.isBlinking
+        blinks = state.blinks
         armsInFront = state.armsInFront
     }
 
@@ -56,21 +55,21 @@ fun KodeePlayground() {
                     value = progress,
                     onValueChange = {
                         progress = it
-                        setToKodeeState(KodeeState.EmailInput(it))
+                        setToKodeeState(KodeeConfig.EmailInput(it))
                     },
                     valueRange = (0f..1f),
                 )
             }
 
-            Button(onClick = { setToKodeeState(KodeeState.Idle) }) {
+            Button(onClick = { setToKodeeState(KodeeConfig.Idle) }) {
                 Text("Idle", color = Color.White)
             }
 
-            Button(onClick = { setToKodeeState(KodeeState.PasswordInputHidden) }) {
+            Button(onClick = { setToKodeeState(KodeeConfig.PasswordInputHidden) }) {
                 Text("Password-Input-Hidden", color = Color.White)
             }
 
-            Button(onClick = { setToKodeeState(KodeeState.PasswordInputShown) }) {
+            Button(onClick = { setToKodeeState(KodeeConfig.PasswordInputShown) }) {
                 Text("Password-Input-Shown", color = Color.White)
             }
         }

@@ -1,15 +1,13 @@
-package at.cgaisl.common.screens.login
+package at.cgaisl.common
 
-import at.cgaisl.common.KodeeTransformation
-
-sealed class KodeeState(
+sealed class KodeeConfig(
     val transformation: KodeeTransformation = KodeeTransformation(),
-    val isBlinking: Boolean = true,
+    val blinks: Boolean = true,
     val armsInFront: Boolean = false,
 ) {
-    object Idle : KodeeState()
-    object PasswordInputShown : KodeeState(
-        isBlinking = true,
+    object Idle : KodeeConfig()
+    object PasswordInputShown : KodeeConfig(
+        blinks = true,
         transformation = KodeeTransformation(
             armLeftTranslationX = 84f,
             armLeftRotationZ = 165f,
@@ -21,8 +19,8 @@ sealed class KodeeState(
         armsInFront = true
     )
 
-    object PasswordInputHidden : KodeeState(
-        isBlinking = false,
+    object PasswordInputHidden : KodeeConfig(
+        blinks = false,
         transformation = KodeeTransformation(
             armLeftTranslationX = 84f,
             armLeftRotationZ = 158f,
@@ -33,7 +31,7 @@ sealed class KodeeState(
         armsInFront = true
     )
 
-    class EmailInput(progress: Float) : KodeeState(
+    class EmailInput(progress: Float) : KodeeConfig(
         transformation = KodeeTransformation(
             headRotationX = -20f,
             headRotationY = -20f + progress * 40f,

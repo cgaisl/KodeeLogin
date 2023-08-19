@@ -66,8 +66,8 @@ fun Kodee(
         if (!blinks) return@LaunchedEffect
 
         while (true) {
-            isCurrentlyBlinking = true
             delay((Random.nextInt(1, 10) * 1000L))
+            isCurrentlyBlinking = true
         }
     }
 
