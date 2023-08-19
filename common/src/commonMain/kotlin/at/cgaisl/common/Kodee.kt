@@ -71,6 +71,23 @@ fun Kodee(
         }
     }
 
+    val animatedHeadRotationX by animateFloatAsState(transformation.headRotationX)
+    val animatedHeadRotationY by animateFloatAsState(transformation.headRotationY)
+    val animatedHeadRotationZ by animateFloatAsState(transformation.headRotationZ)
+    val animatedFaceRotationX by animateFloatAsState(transformation.faceRotationX)
+    val animatedFaceRotationY by animateFloatAsState(transformation.faceRotationY)
+    val animatedFaceRotationZ by animateFloatAsState(transformation.faceRotationZ)
+    val animatedFaceTranslationY by animateFloatAsState(transformation.faceTranslationY)
+    val animatedFaceTranslationX by animateFloatAsState(transformation.faceTranslationX)
+    val animatedArmsTranslationX by animateFloatAsState(transformation.armsTranslationX)
+    val animatedArmsRotationY by animateFloatAsState(transformation.armsRotationY)
+    val animatedArmLeftRotationZ by animateFloatAsState(transformation.armLeftRotationZ)
+    val animatedArmLeftTranslationX by animateFloatAsState(transformation.armLeftTranslationX)
+    val animatedArmLeftTranslationY by animateFloatAsState(transformation.armLeftTranslationY)
+    val animatedArmRightRotationZ by animateFloatAsState(transformation.armRightRotationZ)
+    val animatedArmRightTranslationX by animateFloatAsState(transformation.armRightTranslationX)
+    val animatedArmRightTranslationY by animateFloatAsState(transformation.armRightTranslationY)
+
     Box {
         // Arms
         Row(
@@ -83,8 +100,8 @@ fun Kodee(
             )
                 .padding(top = 117.px(), start = 0.px())
                 .graphicsLayer(
-                    translationX = transformation.armsTranslationX,
-                    rotationY = transformation.armsRotationY,
+                    translationX = animatedArmsTranslationX,
+                    rotationY = animatedArmsRotationY,
                 )
         ) {
             ResourceImage(
@@ -92,9 +109,9 @@ fun Kodee(
                 modifier = Modifier
                     .padding(top = 42.px())
                     .graphicsLayer(
-                        rotationZ = transformation.armLeftRotationZ,
-                        translationX = transformation.armLeftTranslationX,
-                        translationY = transformation.armLeftTranslationY,
+                        rotationZ = animatedArmLeftRotationZ,
+                        translationX = animatedArmLeftTranslationX,
+                        translationY = animatedArmLeftTranslationY,
                     )
             )
 
@@ -103,9 +120,9 @@ fun Kodee(
                 modifier = Modifier
                     .padding(start = 271.px())
                     .graphicsLayer(
-                        rotationZ = transformation.armRightRotationZ,
-                        translationX = transformation.armRightTranslationX,
-                        translationY = transformation.armRightTranslationY,
+                        rotationZ = animatedArmRightRotationZ,
+                        translationX = animatedArmRightTranslationX,
+                        translationY = animatedArmRightTranslationY,
                     )
             )
         }
@@ -124,9 +141,9 @@ fun Kodee(
             modifier = Modifier
                 .padding(top = 0.px(), start = 159.px())
                 .graphicsLayer(
-                    rotationX = transformation.headRotationX,
-                    rotationY = transformation.headRotationY,
-                    rotationZ = transformation.headRotationZ
+                    rotationX = animatedHeadRotationX,
+                    rotationY = animatedHeadRotationY,
+                    rotationZ = animatedHeadRotationZ
                 )
 
         )
@@ -136,11 +153,11 @@ fun Kodee(
             modifier = Modifier
                 .padding(top = 131.px(), start = 223.px())
                 .graphicsLayer(
-                    rotationX = transformation.faceRotationX,
-                    rotationY = transformation.faceRotationY,
-                    rotationZ = transformation.faceRotationZ,
-                    translationY = transformation.faceTranslationY,
-                    translationX = transformation.faceTranslationX,
+                    rotationX = animatedFaceRotationX,
+                    rotationY = animatedFaceRotationY,
+                    rotationZ = animatedFaceRotationZ,
+                    translationY = animatedFaceTranslationY,
+                    translationX = animatedFaceTranslationX,
                 )
         ) {
             ResourceImage(

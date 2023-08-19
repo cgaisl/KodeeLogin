@@ -18,7 +18,7 @@ import at.cgaisl.common.screens.login.KodeeState
 fun KodeePlayground() {
     var transformation by remember { mutableStateOf(KodeeTransformation()) }
     var blinks by remember { mutableStateOf(true) }
-    var armsInFront by remember { mutableStateOf(true) }
+    var armsInFront by remember { mutableStateOf(false) }
 
     fun setToKodeeState(state: KodeeState) {
         transformation = state.transformation
