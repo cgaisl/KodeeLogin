@@ -1,13 +1,18 @@
 package at.cgaisl.common
 
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.delay
+import kotlin.random.Random
 
 
 sealed class KodeeState(
@@ -56,7 +61,24 @@ fun Kodee(
         return (this / conversion).toInt().dp
     }
 
+    var isBlinking by remember { mutableStateOf(false) }
+    val eyeRotation by animateFloatAsState(
+        targetValue = if (isBlinking) 90f else 0f,
+        animationSpec = tween(
+            durationMillis = 200,
+            easing = LinearEasing
+        ),
+        finishedListener = {
+            isBlinking = false
+        }
+    )
 
+    LaunchedEffect(Unit) {
+        while (true) {
+            isBlinking = true
+            delay((Random.nextInt(1, 10) * 1000L))
+        }
+    }
 
     Box {
         ResourceImage(
@@ -100,6 +122,9 @@ fun Kodee(
         ) {
             ResourceImage(
                 "eyes.png",
+                Modifier.graphicsLayer(
+                    rotationX = eyeRotation
+                )
             )
 
             ResourceImage(
