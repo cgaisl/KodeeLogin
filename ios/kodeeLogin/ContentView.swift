@@ -8,14 +8,24 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State var email: String = ""
+    @State var password: String = ""
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+            KodeeLogin(email: $email, password: $password)
+            
+            HStack {
+                Text("Email: ")
+                TextField(email, text: $email)
+            }
+            HStack {
+                Text("Password: ")
+                TextField(password, text: $password)
+            }
         }
-        .padding()
+        
     }
 }
 

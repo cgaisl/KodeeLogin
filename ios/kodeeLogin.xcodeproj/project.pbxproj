@@ -11,6 +11,7 @@
 		C20902FA2A91FC37003DC104 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20902F92A91FC37003DC104 /* ContentView.swift */; };
 		C20902FC2A91FC37003DC104 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C20902FB2A91FC37003DC104 /* Assets.xcassets */; };
 		C20902FF2A91FC37003DC104 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C20902FE2A91FC37003DC104 /* Preview Assets.xcassets */; };
+		C2FA94A22A920B4900546FE2 /* KodeeLoginViewControllerRepresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2FA94A12A920B4900546FE2 /* KodeeLoginViewControllerRepresentable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		C20902F92A91FC37003DC104 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		C20902FB2A91FC37003DC104 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C20902FE2A91FC37003DC104 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		C2FA94A12A920B4900546FE2 /* KodeeLoginViewControllerRepresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KodeeLoginViewControllerRepresentable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +53,7 @@
 		C20902F62A91FC37003DC104 /* kodeeLogin */ = {
 			isa = PBXGroup;
 			children = (
+				C2FA94A12A920B4900546FE2 /* KodeeLoginViewControllerRepresentable.swift */,
 				C20902F72A91FC37003DC104 /* kodeeLoginApp.swift */,
 				C20902F92A91FC37003DC104 /* ContentView.swift */,
 				C20902FB2A91FC37003DC104 /* Assets.xcassets */,
@@ -161,6 +164,7 @@
 			files = (
 				C20902FA2A91FC37003DC104 /* ContentView.swift in Sources */,
 				C20902F82A91FC37003DC104 /* kodeeLoginApp.swift in Sources */,
+				C2FA94A22A920B4900546FE2 /* KodeeLoginViewControllerRepresentable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
