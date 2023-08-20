@@ -13,7 +13,6 @@ import androidx.compose.ui.Modifier
 fun Navigation() {
     var currentScreen by remember { mutableStateOf(Screens.Login) }
 
-
     Surface(modifier = Modifier.fillMaxSize()) {
         Column {
             Row {
@@ -24,12 +23,10 @@ fun Navigation() {
                 }
             }
 
-
             when (currentScreen) {
                 Screens.Playground -> KodeePlayground()
-                Screens.Login -> KodeeLogin()
+                Screens.Login -> KodeeLoginScreen()
             }
-
         }
     }
 }

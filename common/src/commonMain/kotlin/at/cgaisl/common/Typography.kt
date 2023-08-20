@@ -2,19 +2,20 @@ package at.cgaisl.common
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.platform.Font
 
 private val defaultTypography = Typography()
 private val fontFamily = FontFamily(
-    Font(resource = "font/Manrope-Regular.ttf", FontWeight.Normal),
-    Font(resource = "font/Manrope-Medium.ttf", FontWeight.Medium),
-    Font(resource = "font/Manrope-Bold.ttf", FontWeight.Bold),
-    Font(resource = "font/Manrope-ExtraBold.ttf", FontWeight.ExtraBold),
-    Font(resource = "font/Manrope-SemiBold.ttf", FontWeight.SemiBold),
-    Font(resource = "font/Manrope-Light.ttf", FontWeight.Light),
-    Font(resource = "font/Manrope-ExtraLight.ttf", FontWeight.ExtraLight),
+    font("font/Manrope-Regular.ttf", "Manrope-Regular", FontWeight.Normal, FontStyle.Normal),
+    font("font/Manrope-Medium.ttf", "Manrope-Medium", FontWeight.Medium, FontStyle.Normal),
+    font("font/Manrope-Bold.ttf", "Manrope-Bold", FontWeight.Bold, FontStyle.Normal),
+    font("font/Manrope-ExtraBold.ttf", "Manrope-ExtraBold", FontWeight.ExtraBold, FontStyle.Normal),
+    font("font/Manrope-SemiBold.ttf", "Manrope-SemiBold", FontWeight.SemiBold, FontStyle.Normal),
+    font("font/Manrope-Light.ttf", "Manrope-Light", FontWeight.Light, FontStyle.Normal),
+    font("font/Manrope-ExtraLight.ttf", "Manrope-ExtraLight", FontWeight.ExtraLight, FontStyle.Normal),
 )
+
 
 val typography = Typography(
     displayLarge = defaultTypography.displayLarge.copy(fontFamily = fontFamily),

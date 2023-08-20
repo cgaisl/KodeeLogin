@@ -20,10 +20,12 @@ private enum class InputField {
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-fun KodeeLogin() {
-
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
+fun KodeeLogin(
+    email: String,
+    password: String,
+    onEmailChange: (String) -> Unit,
+    onPasswordChange: (String) -> Unit,
+) {
     var focused by remember { mutableStateOf<InputField?>(null) }
     var showPassword by remember { mutableStateOf(false) }
     val (first, second) = remember { FocusRequester.createRefs() }
@@ -69,7 +71,7 @@ fun KodeeLogin() {
                         next = second
                     },
                 value = email,
-                onValueChange = { email = it },
+                onValueChange = { onEmailChange(it) },
                 isFocused = focused == InputField.Email,
                 onFocused = {
                     focused = InputField.Email
@@ -80,7 +82,7 @@ fun KodeeLogin() {
                 modifier = Modifier
                     .focusRequester(second),
                 value = password,
-                onValueChange = { password = it },
+                onValueChange = { onPasswordChange(it) },
                 isFocused = focused == InputField.Password,
                 onFocused = {
                     focused = InputField.Password
