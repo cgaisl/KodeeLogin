@@ -40,6 +40,8 @@ fun EmailInputField(
             ),
         )
 
+        Spacer(modifier = Modifier.height(8.dp))
+
         KodeeInputField(
             value = value,
             onValueChange = onValueChange,

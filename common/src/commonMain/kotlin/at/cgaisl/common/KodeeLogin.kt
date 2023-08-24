@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusProperties
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.unit.dp
 import kotlin.math.min
 
@@ -38,6 +39,13 @@ fun KodeeLogin(
 
         null -> KodeeConfig.Idle
     }
+    val focusManager = LocalFocusManager.current
+
+    LaunchedEffect(focused) {
+        if (focused == null) {
+            focusManager.clearFocus()
+        }
+    }
 
     Box(
         modifier = Modifier
@@ -48,7 +56,7 @@ fun KodeeLogin(
 
         Column(
             modifier = Modifier
-                .width(400.dp)
+                .width(430.dp)
                 .padding(16.dp)
         ) {
             Box(

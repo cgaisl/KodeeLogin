@@ -4,14 +4,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlin.experimental.ExperimentalObjCRefinement
 
 interface ComposeState<T> {
     @get:Composable
     val state: State<T>
 }
 
-@
+@Suppress("unused")
 class ComposeStateImplementation<T>(
     value: T,
 ) : ComposeState<T> {

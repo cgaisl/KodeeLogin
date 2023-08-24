@@ -4,6 +4,7 @@
 plugins {
     kotlin("multiplatform")
     id("org.jetbrains.compose")
+    id("com.android.library")
 }
 
 // cocoapods requires version
@@ -26,6 +27,8 @@ kotlin {
             }
         }
     }
+
+    androidTarget()
 
     sourceSets {
         val commonMain by getting {
@@ -53,5 +56,21 @@ kotlin {
             iosArm64Main.dependsOn(this)
             iosSimulatorArm64Main.dependsOn(this)
         }
+        val androidMain by getting
+    }
+}
+
+android {
+    namespace = "at.cgaisl.common"
+    compileSdk = 34
+    sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
+    sourceSets["main"].res.srcDirs("src/androidMain/res", "src/commonMain/resources")
+    sourceSets["main"].resources.srcDirs("src/commonMain/resources")
+    defaultConfig {
+        minSdk = 24
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 }

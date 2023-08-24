@@ -1,5 +1,6 @@
 package at.cgaisl.common
 
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.uikit.OnFocusBehavior
 import androidx.compose.ui.window.ComposeUIViewController
 
@@ -14,14 +15,16 @@ fun KodeeLoginViewController(
         this.onFocusBehavior = OnFocusBehavior.DoNothing
     }
 ) {
-    KodeeLogin(
-        email = email.state.value,
-        password = password.state.value,
-        onEmailChange = {
-            onEmailChange(it)
-        },
-        onPasswordChange = {
-            onPasswordChange(it)
-        },
-    )
+    MaterialTheme(typography = typography())  {
+        KodeeLogin(
+            email = email.state.value,
+            password = password.state.value,
+            onEmailChange = {
+                onEmailChange(it)
+            },
+            onPasswordChange = {
+                onPasswordChange(it)
+            },
+        )
+    }
 }

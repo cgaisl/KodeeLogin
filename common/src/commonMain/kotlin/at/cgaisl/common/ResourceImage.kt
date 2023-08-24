@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalResourceApi::class)
-
 package at.cgaisl.common
 
 import androidx.compose.foundation.Image
@@ -11,6 +9,7 @@ import androidx.compose.ui.layout.ContentScale
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.resource
 
+@OptIn(ExperimentalResourceApi::class)
 @Composable
 fun ResourceImage(
     resourceName: String,
@@ -33,7 +32,3 @@ fun ResourceImage(
         )
     }
 }
-
-//fun ByteArray.toSvg(): ImageBitmap {
-//    return org.jetbrains.skia.Image.makeRaster(this).toComposeImageBitmap()
-//}
