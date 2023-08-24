@@ -1,49 +1,27 @@
 package at.cgaisl.common
 
-import androidx.compose.runtime.*
+import androidx.compose.ui.uikit.OnFocusBehavior
 import androidx.compose.ui.window.ComposeUIViewController
-
-@Suppress("unused")
-class SwiftUIInputDelegate(
-    val onEmailChange: (String) -> Unit,
-    val onPasswordChange: (String) -> Unit,
-)
 
 @Suppress("FunctionName", "unused")
 fun KodeeLoginViewController(
-    initialEmail: String,
-    initialPassword: String,
-    updateSwiftUIEmail: (String) -> Unit,
-    updateSwiftUIPassword: (String) -> Unit,
-    configureInputDelegate: (SwiftUIInputDelegate) -> Unit,
-) = ComposeUIViewController {
-
-    var email by remember { mutableStateOf(initialEmail) }
-    var password by remember { mutableStateOf(initialPassword) }
-
-    LaunchedEffect(Unit) {
-        configureInputDelegate(
-            SwiftUIInputDelegate(
-                onEmailChange = {
-                    email = it
-                },
-                onPasswordChange = {
-                    password = it
-                },
-            )
-        )
+    email: ComposeState<String>,
+    password: ComposeState<String>,
+    onEmailChange: (String) -> Unit,
+    onPasswordChange: (String) -> Unit,
+) = ComposeUIViewController(
+    configure = {
+        this.onFocusBehavior = OnFocusBehavior.DoNothing
     }
-
+) {
     KodeeLogin(
-        email = email,
-        password = password,
+        email = email.state.value,
+        password = password.state.value,
         onEmailChange = {
-            email = it
-            updateSwiftUIEmail(it)
+            onEmailChange(it)
         },
         onPasswordChange = {
-            password = it
-            updateSwiftUIPassword(it)
+            onPasswordChange(it)
         },
     )
 }

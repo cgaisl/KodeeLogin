@@ -1,10 +1,3 @@
-//
-//  ContentView.swift
-//  kodeeLogin
-//
-//  Created by Christian Gaisl on 20.08.23.
-//
-
 import SwiftUI
 
 struct ContentView: View {
@@ -14,18 +7,16 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            KodeeLogin(email: $email, password: $password)
-            
-            HStack {
-                Text("Email: ")
-                TextField(email, text: $email)
-            }
-            HStack {
-                Text("Password: ")
-                TextField(password, text: $password)
+            ZStack(
+                alignment: .center
+            ) {
+                KodeeLogin(email: $email, password: $password)
+            }.onTapGesture {
+                print("we doing something")
+                // Hide keyboard on tap outside of TextField
+                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
             }
         }
-        
     }
 }
 
