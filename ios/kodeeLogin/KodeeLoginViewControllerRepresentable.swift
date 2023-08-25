@@ -5,16 +5,18 @@ import SwiftUI
 struct KodeeLogin: UIViewControllerRepresentable {
     @Binding var email: String
     @Binding var password: String
+    let onLogin: () -> Void
     
     @State var emailComposeState: ComposeStateImplementation<NSString>
     @State var passwordComposeState: ComposeStateImplementation<NSString>
     
     
-    init(email: Binding<String>, password: Binding<String>) {
+    init(email: Binding<String>, password: Binding<String>, onLogin: @escaping () -> Void) {
         _email = email
         _password = password
         _emailComposeState = State(initialValue: ComposeStateImplementation(value: email.wrappedValue as NSString))
         _passwordComposeState = State(initialValue: ComposeStateImplementation(value: password.wrappedValue as NSString))
+        self.onLogin = onLogin
     }
     
     
@@ -23,7 +25,8 @@ struct KodeeLogin: UIViewControllerRepresentable {
             email: emailComposeState,
             password: passwordComposeState,
             onEmailChange: {  email = $0 },
-            onPasswordChange: { password = $0 }
+            onPasswordChange: { password = $0 },
+            onLogin: { onLogin() }
         )
     }
 

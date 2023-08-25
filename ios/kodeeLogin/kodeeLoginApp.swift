@@ -4,7 +4,7 @@ import SwiftUI
 struct kodeeLoginApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            Navigation()
         }
     }
 }

@@ -10,6 +10,7 @@ fun KodeeLoginViewController(
     password: ComposeState<String>,
     onEmailChange: (String) -> Unit,
     onPasswordChange: (String) -> Unit,
+    onLogin: () -> Unit = {}
 ) = ComposeUIViewController(
     configure = {
         this.onFocusBehavior = OnFocusBehavior.DoNothing
@@ -25,6 +26,9 @@ fun KodeeLoginViewController(
             onPasswordChange = {
                 onPasswordChange(it)
             },
+            onLogin = {
+                onLogin()
+            }
         )
     }
 }

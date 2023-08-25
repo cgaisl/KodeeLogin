@@ -1,17 +1,19 @@
 import SwiftUI
 
-struct ContentView: View {
+struct KodeeLoginScreen: View {
+    
+    let onLogin: () -> Void
     
     @State var email: String = ""
     @State var password: String = ""
     
     var body: some View {
-        KodeeLogin(email: $email, password: $password)
+        KodeeLogin(email: $email, password: $password, onLogin: onLogin)
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        KodeeLoginScreen {}
     }
 }

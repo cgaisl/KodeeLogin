@@ -26,6 +26,7 @@ fun KodeeLogin(
     password: String,
     onEmailChange: (String) -> Unit,
     onPasswordChange: (String) -> Unit,
+    onLogin: () -> Unit
 ) {
     var focused by remember { mutableStateOf<InputField?>(null) }
     var showPassword by remember { mutableStateOf(false) }
@@ -106,7 +107,10 @@ fun KodeeLogin(
 
             Button(
                 modifier = Modifier.fillMaxWidth(),
-                onClick = { focused = null }
+                onClick = {
+                    focused = null
+                    onLogin()
+                }
             ) {
                 Text("Login")
             }
