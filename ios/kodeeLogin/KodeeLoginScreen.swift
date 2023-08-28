@@ -15,5 +15,6 @@ struct KodeeLoginScreen: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         KodeeLoginScreen {}
+//            .previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro"))
     }
 }

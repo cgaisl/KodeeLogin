@@ -1,5 +1,6 @@
 package at.cgaisl.common
 
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.ApplicationScope
@@ -13,6 +14,8 @@ fun ApplicationScope.KodeeLoginDesktop() {
         title = "Compose for Desktop",
         state = rememberWindowState(width = 1500.dp, height = 1000.dp)
     ) {
-        App()
+        MaterialTheme(typography = typography()) {
+            Navigation()
+        }
     }
 }

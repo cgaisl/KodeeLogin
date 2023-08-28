@@ -12,6 +12,6 @@ fun KodeeLoginScreen() {
         password = password,
         onEmailChange = { email = it },
         onPasswordChange = { password = it },
-        onLogin = {}
+        onLogin = { /* Do Login */ }
     )
 }
