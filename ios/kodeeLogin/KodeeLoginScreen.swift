@@ -8,7 +8,11 @@ struct KodeeLoginScreen: View {
     @State var password: String = ""
     
     var body: some View {
-        KodeeLogin(email: $email, password: $password, onLogin: onLogin)
+        KodeeLogin(
+            email: $email,
+            password: $password,
+            onLogin: { /* do login */ }
+        )
     }
 }
 

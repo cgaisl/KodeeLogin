@@ -76,26 +76,19 @@ fun KodeeLogin(
             EmailInputField(
                 modifier = Modifier
                     .focusRequester(first)
-                    .focusProperties {
-                        next = second
-                    },
+                    .focusProperties { next = second },
                 value = email,
                 onValueChange = { onEmailChange(it) },
                 isFocused = focused == InputField.Email,
-                onFocused = {
-                    focused = InputField.Email
-                }
+                onFocused = { focused = InputField.Email }
             )
 
             PasswordInputField(
-                modifier = Modifier
-                    .focusRequester(second),
+                modifier = Modifier.focusRequester(second),
                 value = password,
                 onValueChange = { onPasswordChange(it) },
                 isFocused = focused == InputField.Password,
-                onFocused = {
-                    focused = InputField.Password
-                },
+                onFocused = { focused = InputField.Password },
                 showPassword = showPassword,
                 setPasswordShown = {
                     showPassword = it

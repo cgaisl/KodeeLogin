@@ -20,15 +20,9 @@ fun KodeeLoginViewController(
         KodeeLogin(
             email = email.state.value,
             password = password.state.value,
-            onEmailChange = {
-                onEmailChange(it)
-            },
-            onPasswordChange = {
-                onPasswordChange(it)
-            },
-            onLogin = {
-                onLogin()
-            }
+            onEmailChange = onEmailChange,
+            onPasswordChange = onPasswordChange,
+            onLogin = onLogin
         )
     }
 }

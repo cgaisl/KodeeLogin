@@ -11,7 +11,11 @@ struct KodeeLogin: UIViewControllerRepresentable {
     @State var passwordComposeState: ComposeStateImplementation<NSString>
     
     
-    init(email: Binding<String>, password: Binding<String>, onLogin: @escaping () -> Void) {
+    init(
+        email: Binding<String>,
+        password: Binding<String>,
+        onLogin: @escaping () -> Void
+    ) {
         _email = email
         _password = password
         _emailComposeState = State(initialValue: ComposeStateImplementation(value: email.wrappedValue as NSString))

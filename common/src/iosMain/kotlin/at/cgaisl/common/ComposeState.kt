@@ -11,11 +11,8 @@ interface ComposeState<T> {
 }
 
 @Suppress("unused")
-class ComposeStateImplementation<T>(
-    value: T,
-) : ComposeState<T> {
+class ComposeStateImplementation<T>(value: T) : ComposeState<T> {
     private val _state = MutableStateFlow(value)
-
 
     override val state: State<T>
         @Composable
