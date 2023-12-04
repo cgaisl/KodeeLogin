@@ -1,14 +1,24 @@
 plugins {
-    kotlin("jvm")
+    kotlin("multiplatform")
     id("org.jetbrains.compose")
-    application
 }
 
-dependencies {
-    implementation(project(":common"))
-    implementation(compose.desktop.currentOs)
+kotlin {
+    jvm("desktop")
+
+    sourceSets {
+        val desktopMain by getting {
+            dependencies {
+                implementation(project(":common"))
+                implementation(compose.desktop.common)
+                implementation(compose.desktop.currentOs)
+            }
+        }
+    }
 }
 
-application {
-    mainClass.set("MainKt")
+compose.desktop {
+    application {
+        mainClass = "mainKt"
+    }
 }

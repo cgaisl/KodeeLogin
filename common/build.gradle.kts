@@ -11,10 +11,12 @@ plugins {
 version = "1.0-SNAPSHOT"
 
 kotlin {
-    jvm()
+    jvm("desktop")
 
     iosArm64()
     iosSimulatorArm64()
+
+    androidTarget()
 
     listOf(
         iosArm64(),
@@ -28,8 +30,6 @@ kotlin {
         }
     }
 
-    androidTarget()
-
     sourceSets {
         val commonMain by getting {
             dependencies {
@@ -38,25 +38,16 @@ kotlin {
                 api(compose.material)
                 api(compose.material3)
                 @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
-                implementation(compose.components.resources)
-
+                implementation("org.jetbrains.compose.components:components-resources:1.6.0-dev1296")
                 implementation ("org.jetbrains.kotlin:kotlin-stdlib:${extra["kotlin.version"] as String}")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
             }
         }
-        val jvmMain by getting {
+        val desktopMain by getting {
             dependencies {
                 implementation(compose.desktop.common)
             }
         }
-        val iosArm64Main by getting
-        val iosSimulatorArm64Main by getting
-        val iosMain by creating {
-            dependsOn(commonMain)
-            iosArm64Main.dependsOn(this)
-            iosSimulatorArm64Main.dependsOn(this)
-        }
-        val androidMain by getting
     }
 }
 
