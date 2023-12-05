@@ -7,7 +7,7 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import org.jetbrains.compose.resources.ExperimentalResourceApi
-import org.jetbrains.compose.resources.readResourceBytes
+import org.jetbrains.compose.resources.resource
 
 @OptIn(ExperimentalResourceApi::class)
 @Composable
@@ -18,7 +18,7 @@ fun ResourceImage(
 ) {
     var image: ImageBitmap? by remember { mutableStateOf(null) }
     LaunchedEffect("") {
-        image = readResourceBytes(resourceName).toImageBitmap()
+        image = resource(resourceName).readBytes().toImageBitmap()
     }
 
 

@@ -1,4 +1,4 @@
-@file:Suppress("UnstableApiUsage")
+@file:Suppress("UnstableApiUsage", "OPT_IN_USAGE")
 
 
 plugins {
@@ -17,6 +17,10 @@ kotlin {
     iosSimulatorArm64()
 
     androidTarget()
+
+    wasmJs {
+        browser()
+    }
 
     listOf(
         iosArm64(),
@@ -38,7 +42,7 @@ kotlin {
                 api(compose.material)
                 api(compose.material3)
                 @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
-                implementation("org.jetbrains.compose.components:components-resources:1.6.0-dev1296")
+                implementation(compose.components.resources)
                 implementation ("org.jetbrains.kotlin:kotlin-stdlib:${extra["kotlin.version"] as String}")
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
             }
