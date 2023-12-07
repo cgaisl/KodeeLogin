@@ -27,7 +27,7 @@ fun KodeeLoginScreen() {
                     Text("OK")
                 }
             },
-            title = { Text("Hi $email") },
+            title = { Text("Hi $email!") },
             text = { Text("Thank you for checking out my project!") },
         )
     }
