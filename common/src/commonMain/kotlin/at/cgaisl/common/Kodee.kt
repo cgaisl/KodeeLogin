@@ -3,6 +3,7 @@ package at.cgaisl.common
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
@@ -13,7 +14,9 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
+import at.cgaisl.common.resources.*
 import kotlinx.coroutines.delay
+import org.jetbrains.compose.resources.painterResource
 import kotlin.random.Random
 
 data class KodeeTransformation(
@@ -104,8 +107,9 @@ fun Kodee(
                     rotationY = animatedArmsRotationY,
                 )
         ) {
-            ResourceImage(
-                "arm_left.png",
+            Image(
+                painter = painterResource(Res.drawable.arm_left),
+                contentDescription = null,
                 modifier = Modifier
                     .padding(top = 42.px())
                     .graphicsLayer(
@@ -115,8 +119,9 @@ fun Kodee(
                     )
             )
 
-            ResourceImage(
-                "arm_right.png",
+            Image(
+                painter = painterResource(Res.drawable.arm_right),
+                contentDescription = null,
                 modifier = Modifier
                     .padding(start = 271.px())
                     .graphicsLayer(
@@ -129,15 +134,17 @@ fun Kodee(
 
 
         // Legs
-        ResourceImage(
-            "legs.png",
+        Image(
+            painter = painterResource(Res.drawable.legs),
+            contentDescription = null,
             modifier = Modifier.padding(top = 247.px(), start = 262.px())
 
         )
 
         // Head
-        ResourceImage(
-            "head.png",
+        Image(
+            painter = painterResource(Res.drawable.head),
+            contentDescription = null,
             modifier = Modifier
                 .padding(top = 0.px(), start = 159.px())
                 .graphicsLayer(
@@ -160,15 +167,17 @@ fun Kodee(
                     translationX = animatedFaceTranslationX,
                 )
         ) {
-            ResourceImage(
-                "eyes.png",
+            Image(
+                painter = painterResource(Res.drawable.eyes),
+                contentDescription = null,
                 Modifier.graphicsLayer(
                     rotationX = eyeRotation
                 )
             )
 
-            ResourceImage(
-                "mouth.png",
+            Image(
+                painter = painterResource(Res.drawable.mouth),
+                contentDescription = null,
                 modifier = Modifier
                     .padding(top = 96.px(), start = 92.px())
             )
