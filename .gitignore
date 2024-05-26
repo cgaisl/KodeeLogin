@@ -392,3 +392,5 @@ fabric.properties
 
 ios/Podfile.lock
 ios/Pods/*
+
+/.kotlin/metadata/*
