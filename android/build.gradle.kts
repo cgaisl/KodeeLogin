@@ -1,31 +1,28 @@
-@file:Suppress("UnstableApiUsage")
-
-
 plugins {
-    id("com.android.application")
-    kotlin("android")
-    id("org.jetbrains.kotlin.plugin.compose")
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.compose)
 }
 
 group = "at.cgaisl.android"
 version = "1.0-SNAPSHOT"
 
- dependencies {
+dependencies {
     implementation(project(":common"))
-    implementation("androidx.activity:activity-compose:1.7.2")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("androidx.compose.material3:material3:1.1.1")
-    implementation("androidx.compose.ui:ui-tooling-preview:1.6.0-alpha04")
-    debugImplementation("androidx.compose.ui:ui-tooling:1.5.0")
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.ui.tooling.preview)
+    debugImplementation(libs.androidx.compose.ui.tooling)
 }
 
 android {
     namespace = "at.cgaisl.android"
-    compileSdk = 34
+    compileSdk = 36
     defaultConfig {
         applicationId = "at.cgaisl.android.kodeelogin"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0-SNAPSHOT"
     }

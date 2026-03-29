@@ -1,11 +1,10 @@
-@file:Suppress("UnstableApiUsage", "OPT_IN_USAGE")
-
+import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 
 plugins {
-    kotlin("multiplatform")
-    id("org.jetbrains.compose")
-    id("org.jetbrains.kotlin.plugin.compose")
-    id("com.android.library")
+    alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.compose.multiplatform)
+    alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.android.library)
 }
 
 // cocoapods requires version
@@ -19,6 +18,7 @@ kotlin {
 
     androidTarget()
 
+    @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
         browser()
     }
@@ -42,10 +42,8 @@ kotlin {
                 api(compose.foundation)
                 api(compose.material)
                 api(compose.material3)
-                @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
                 implementation(compose.components.resources)
-                implementation ("org.jetbrains.kotlin:kotlin-stdlib:${extra["kotlin.version"] as String}")
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
+                implementation(libs.kotlinx.coroutines.core)
             }
         }
         val desktopMain by getting {
@@ -58,7 +56,7 @@ kotlin {
 
 android {
     namespace = "at.cgaisl.common"
-    compileSdk = 34
+    compileSdk = 36
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     sourceSets["main"].res.srcDirs("src/androidMain/res", "src/commonMain/resources")
     sourceSets["main"].resources.srcDirs("src/commonMain/resources")

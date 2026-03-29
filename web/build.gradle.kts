@@ -1,52 +1,31 @@
-@file:Suppress("OPT_IN_USAGE")
-
-import org.jetbrains.compose.ExperimentalComposeLibrary
+import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
 plugins {
-    kotlin("multiplatform")
-    id("org.jetbrains.compose")
-    id("org.jetbrains.kotlin.plugin.compose")
-}
-
-val copyWasmResources = tasks.create("copyWasmResourcesWorkaround", Copy::class.java) {
-    from(project(":common").file("src/commonMain/resources"))
-    into("build/processedResources/wasmJs/main")
-}
-
-afterEvaluate {
-    project.tasks.named("wasmJsDevelopmentExecutableCompileSync") {
-        mustRunAfter("copyWasmResourcesWorkaround")
-    }
-    project.tasks.named("wasmJsProductionExecutableCompileSync") {
-        mustRunAfter("copyWasmResourcesWorkaround")
-    }
-    project.tasks.getByName("wasmJsProcessResources").finalizedBy(copyWasmResources)
+    alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.compose.multiplatform)
+    alias(libs.plugins.kotlin.compose)
 }
 
 kotlin {
+    @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
-        moduleName = "kodeeLogin"
+        outputModuleName.set("kodeeLogin")
         browser {
             commonWebpackConfig {
                 outputFileName = "kodeeLogin.js"
                 devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
-                    static = (static ?: mutableListOf()).apply {
-                        // Serve sources to debug inside browser
-                        add(project.rootDir.path)
-                        add(project.rootDir.path + "/shared/")
-                        add(project.rootDir.path + "/nonAndroidMain/")
-                        add(project.rootDir.path + "/webApp/")
-                    }
+                    static(project.rootDir.path)
+                    static(project.rootDir.path + "/shared/")
+                    static(project.rootDir.path + "/nonAndroidMain/")
+                    static(project.rootDir.path + "/webApp/")
                 }
             }
         }
         binaries.executable()
     }
 
-
     sourceSets {
-        @OptIn(ExperimentalComposeLibrary::class)
         commonMain {
             dependencies {
                 implementation(project(":common"))

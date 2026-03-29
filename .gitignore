@@ -394,3 +394,4 @@ ios/Podfile.lock
 ios/Pods/*
 
 /.kotlin/metadata/*
+.claude/settings.local.json
